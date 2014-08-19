@@ -32,7 +32,14 @@ var options = {
     cert: fs.readFileSync('config/certs/server.crt')
 };
 
-https.createServer(options, app).listen(config.httpsPort);
+var secureServer = https.createServer(options, app);
+var regularServer = http.createServer(app);
+
+// Listen on httpsPort
+secureServer.listen(config.httpsPort);
+
+// Listen on regular port
+regularServer.listen(config.port);
 
 // Expose app
 exports = module.exports = app;
