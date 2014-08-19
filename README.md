@@ -6,11 +6,13 @@
 ## Setting up SSL on MEANJS
 * Visit [this page](http://www.akadia.com/services/ssh_test_certificate.html) for an explanation of how to sign a cert
 * Add certs to `config/certs` directory
-* See [this question](https://stackoverflow.com/questions/5998694/how-to-create-an-https-server-in-node-js) to understand how to add an https server to our stack (note: this means you do not use app.listen anywhere
+* See [this question](https://stackoverflow.com/questions/5998694/how-to-create-an-https-server-in-node-js) to understand how to add an https server to our stack (note: this means you do not use app.listen anywhere)
 * Add a field for the https port in [config.js](config/config.js)
 * Add certificate info (see [this question](https://stackoverflow.com/questions/5998694/how-to-create-an-https-server-in-node-js)) to server
 * Make the http server listen to the regular port, and make the secure server listen to the secure port [example](server.js)
 * Add redirecting middleware to your app
+
+## Setting up OAuth
 
 
 
