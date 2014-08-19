@@ -25,7 +25,7 @@ require('./config/passport')();
 // Start the app by listening on <port>
 //app.listen(config.port);
 
-http.createServer(app).listen(config.httpsPort);
+https.createServer(options, app).listen(config.httpsPort);
 
 // Expose app
 exports = module.exports = app;
