@@ -4,7 +4,9 @@
  */
 var init = require('./config/init')(),
 	config = require('./config/config'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+    http = require('http'),
+    https = require('https');
 
 /**
  * Main application entry file.
@@ -22,8 +24,8 @@ require('./config/passport')();
 
 // Start the app by listening on <port>
 //app.listen(config.port);
-// Use https port
-app.listen(config.httpsPort);
+
+http.createServer(app).listen(config.httpsPort);
 
 // Expose app
 exports = module.exports = app;
