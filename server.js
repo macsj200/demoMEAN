@@ -46,3 +46,4 @@ exports = module.exports = app;
 
 // Logging initialization
 console.log('MEAN.JS application started on port ' + config.port);
+console.log('Listening securely on port ' + config.httpsPort);

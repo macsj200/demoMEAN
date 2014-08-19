@@ -19,7 +19,7 @@ var express = require('express'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path'),
-    forceSSL = require('express-force-ssl');
+    redirectToHttps = require('./redirectToHttps');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -100,21 +100,11 @@ module.exports = function(db) {
 	// connect flash for flash messages
 	app.use(flash());
 
-    // Middleware to redirect to https
-    // not sure if this is buggy or not
-    var redirectToHttps = function(req, res, next) {
-        if (!req.secure) {
-            var newPath = 'https://' + req.get('host').split(':')[0] + ':' + config.httpsPort + req.url;
-            console.log(newPath);
-
-            //FYI this should work for local development as well
-            return res.redirect(newPath);
-        }
-        next();
-    };
+    // Specify https port for redirectToHttps module
+    redirectToHttps.options.httpsPort = config.httpsPort;
 
     // Use requireHttps to redirect insecure requests
-    app.use(redirectToHttps);
+    app.use(redirectToHttps.redirectToHttpsMiddleware);
 
 	// Use helmet to secure Express headers
 	app.use(helmet.xframe());
