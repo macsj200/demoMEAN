@@ -6,7 +6,8 @@ var init = require('./config/init')(),
 	config = require('./config/config'),
 	mongoose = require('mongoose'),
     http = require('http'),
-    https = require('https');
+    https = require('https'),
+    fs = require('fs');
 
 /**
  * Main application entry file.
@@ -24,6 +25,12 @@ require('./config/passport')();
 
 // Start the app by listening on <port>
 //app.listen(config.port);
+
+// This line is from the Node.js HTTPS documentation.
+var options = {
+    key: fs.readFileSync('config/certs/server.key'),
+    cert: fs.readFileSync('config/certs/server.crt')
+};
 
 https.createServer(options, app).listen(config.httpsPort);
 
